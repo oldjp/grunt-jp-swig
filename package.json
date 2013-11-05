@@ -1,0 +1,52 @@
+{
+  "name": "grunt-jp-swig",
+  "description": "Compiles Swig templates",
+  "version": "0.0.1",
+  "homepage": "https://github.com/johnpitcher/grunt-jp-swig",
+  "author": {
+    "name": "John Pitcher",
+    "url": "http://johnpitcher.pl/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/johnpitcher/grunt-jp-swig.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/gruntjs/grunt-contrib-cssmin/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "dependencies": {
+    "clean-css": "~1.1.1",
+    "grunt-lib-contrib": "~0.6.0",
+    "swig": "x"
+  },
+  "devDependencies": {
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt": "~0.4.0"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "keywords": [
+    "gruntplugin", "swig"
+  ],
+  "contributors": [
+    {
+      "name": "Kacper Kula",
+      "url": "http://kulak.at/"
+    },
+    {
+      "name": "Marek Kobylinski",
+      "url": ""
+    }
+  ],
+  "readmeFilename": "README.md",
+  "_id": "grunt-jp-swig@0.0.1"
+}
+
