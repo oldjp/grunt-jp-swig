@@ -1,31 +1,45 @@
-grunt-jp-swig
+grunt-jp-swig [![Build Status](https://travis-ci.org/johnpitcher/grunt-jp-swig.png?branch=master)](https://travis-ci.org/johnpitcher/grunt-jp-swig)
 =============
 
 Swig templates compilation
 
 
 Sample configuration:
-swig: {
-	options: {
-		processContent: function(src) {
-			return src;
-		},
-		processName: function(name) {
-			return name.replace(/^templates\//g,'')
-				   .replace(/\//g,'-')
-				   .replace(/.twig$/g,'');
-			},
-			namespace: 'App.tmpl'
-		},
-		compile: {
-			files: {
-				'project/www/js/templates.js': [
-					'templates/**/*.twig'
-				]
-			}
-		}
-	}
+
+```JavaScript
+"swig-browser": {
+  frontTemplates:{
+    options:{
+
+      // window.<namespace>
+      namespace: 'SWIG',
+
+      // @todo
+      templateSettings: {},
+
+      amd: false,
+      
+      // init as a parent template
+      layout: false,
+
+      prettify: false,
+
+      // attach swig browser env to a template function
+      processor: false, 
+
+      // modify template function source code 
+      processContent: function(src) { return src; },
+
+      // modify template name
+      processName: function(name) { return name; }
+    }
+  }	
+}
+```
 
 On browser site:
+----------------
 
-swig.run(App.tmpl['example-template'], { var1: value, var2: value2});
+```JavaScript
+  var html = window.SWIG[<template name>]({});
+```
