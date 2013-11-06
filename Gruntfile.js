@@ -1,60 +1,88 @@
+'use strict';
+
 module.exports = function(grunt) {
- 
-	grunt.registerMultiTask('swig', 'Compiles swig templates', function() {
-		var lf = grunt.util.linefeed;
-		var helpers = require('grunt-lib-contrib').init(grunt);
-		var swig = require('swig');
-		
-		var options = this.options({
-			namespace: 'TWIG',
-			templateSettings: {},
-			processContent: function(src) { return src; },
-			separator: lf + lf
-		});
-		var processName = options.processName || defaultProcessName;
-		var nsInfo = helpers.getNamespaceDeclaration(options.namespace);
-		
-		
-		this.files.forEach(function(f) {
-			var output = f.src.filter(function(filepath) {
-				if(!grunt.file.exists(filepath)) {
-					grunt.log.warn('Source file"' + filepath + '" not found.');
-					return false;
-				} else {
-					return true;
-				}
-			}).map(function(filepath) {
-				var src = options.processContent(grunt.file.read(filepath));
-				var compiled, filename;
-				
-				src = src.replace(new RegExp('\n', 'g'), '');
-				
-				filename = processName(filepath);
-				
-				compiled = swig.precompile(src).tpl.toString().replace('anonymous', '');
-				
-				return nsInfo.namespace + '[' + JSON.stringify(filename) + '] = ' + compiled + ';';
-				
-			});
-			
-			if (output.length < 1) {
-        grunt.log.warn('Destination not written because compiled files were empty.');
-      } else {
-        output.unshift(nsInfo.declaration);
-        if (options.amdWrapper) {
-          if (options.prettify) {
-            output.forEach(function(line, index) {
-              output[index] = "  " + line;
-            });
+
+  grunt.initConfig({
+    jshint: {
+      all: [
+        'Gruntfile.js',
+        'tasks/*.js',
+        '<%= nodeunit.tests %>',
+      ],
+      options: {
+        jshintrc: '.jshintrc',
+      },
+    },
+
+    clean: {
+      tests: ['tmp'],
+    },
+
+    "swig-browser": {
+      opts_default_one:{ files:{ 'tmp/default_options_one.js': ['test/fixtures/simple.swig'] } },
+      opts_default_all:{ files:{ 'tmp/default_options_all.js': ['test/fixtures/*.swig'] } },
+      opts_amd:{
+        options:{ amd: true },
+        files:{ 'tmp/amd.js': ['test/fixtures/*.swig'] }
+      },
+      opts_namespace:{
+        options:{ namespace:'APP.Templates' },
+        files:{ 'tmp/namespace.js': ['test/fixtures/*.swig'] }
+      },
+      opts_processor:{
+        options:{ processor:'window.swig' },
+        files:{ 'tmp/processor.js': ['test/fixtures/*.swig'] }
+      },
+      opts_amd_processor_prettify:{
+        options:{
+          amd: true,
+          processor: 'window.swig',
+          prettify: true
+        },
+        files:{ 'tmp/amd_processor_prettify.js': ['test/fixtures/*.swig'] }
+      },
+      opts_layout_incorrect: {
+        options:{ layout: true },
+        files:{ 'tmp/layout_incorrect.js': ['test/fixtures/*.swig'] }
+      },
+      opts_layout_correct: {
+        options:{
+          processor: 'window.swig',
+          layout: true
+        },
+        files:{ 'tmp/layout_correct.js': ['test/fixtures/*.swig'] }
+      },
+      opts_processContent: {
+        options:{
+          processContent: function(content){
+            return content.replace('_output = ""','_output = "", addons = window.Addons');
           }
-          output.unshift("define(function(){");
-          output.push("  return " + nsInfo.namespace + ";" + lf + "});");
-        }
-        grunt.file.write(f.dest, output.join(grunt.util.normalizelf(options.separator)));
-        grunt.log.writeln('File "' + f.dest + '" created.');
+        },
+        files:{ 'tmp/process_content.js': ['test/fixtures/*.swig'] }
+      },
+      opts_processName: {
+        options:{
+          processName: function(name){
+            return name.replace('test/fixtures/','').replace('.swig', '');
+          }
+        },
+        files:{ 'tmp/process_name.js': ['test/fixtures/*.swig'] }
       }
-			
-		});
-		
-	});
+    },
+
+    nodeunit: {
+      tests: ['test/*_test.js'],
+    },
+
+  });
+
+  grunt.loadTasks('tasks');
+
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
+
+  grunt.registerTask('test', ['clean', 'swig-browser', 'nodeunit']);
+  grunt.registerTask('default', ['jshint', 'test']);
+
 };

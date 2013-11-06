@@ -1,41 +1,46 @@
 {
   "name": "grunt-jp-swig",
-  "description": "Compiles Swig templates",
-  "version": "0.0.1",
+  "description": "Compiles swig templates",
+  "version": "0.1.0",
   "homepage": "https://github.com/johnpitcher/grunt-jp-swig",
   "author": {
     "name": "John Pitcher",
-    "url": "http://johnpitcher.pl/"
+    "url": "http://johnpitcher.pl"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/johnpitcher/grunt-jp-swig.git"
   },
+  "bugs": {
+    "url": "https://github.com/johnpitcher/grunt-jp-swig/issues"
+  },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/gruntjs/grunt-contrib-cssmin/blob/master/LICENSE-MIT"
+      "url": "https://github.com/johnpitcher/grunt-jp-swig/blob/master/LICENSE-MIT"
     }
   ],
   "main": "Gruntfile.js",
   "engines": {
     "node": ">= 0.8.0"
   },
+  "scripts": {
+    "test": "grunt test"
+  },
   "dependencies": {
-    "clean-css": "~1.1.1",
-    "grunt-lib-contrib": "~0.6.0",
-    "swig": "x"
+    "swig": "1.1.0",
+    "grunt-lib-contrib": "~0.6.1",
+    "js-beautify": "1.4.x"
   },
   "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-clean": "~0.4.0",
-    "grunt": "~0.4.0"
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1"
   },
   "peerDependencies": {
-    "grunt": "~0.4.0"
+    "grunt": "~0.4.1"
   },
-  "keywords": [
-    "gruntplugin", "swig"
-  ],
   "contributors": [
     {
       "name": "Kacper Kula",
@@ -43,10 +48,12 @@
     },
     {
       "name": "Marek Kobylinski",
-      "url": ""
+      "email": "marek.kobylinski@johnpitcher.pl"
     }
   ],
+  "keywords": [
+    "gruntplugin", "swig"
+  ],
   "readmeFilename": "README.md",
-  "_id": "grunt-jp-swig@0.0.1"
+  "_id": "grunt-jp-swig@0.1.0"
 }
-
