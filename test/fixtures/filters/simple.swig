@@ -1,0 +1,1 @@
+<div>{{ "text"|simple("test") }}</div>

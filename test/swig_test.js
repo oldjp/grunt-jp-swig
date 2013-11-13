@@ -45,6 +45,10 @@ exports.swig = {
     var expected = grunt.file.read('test/expected/process_name.js');
     test.equal(expected, generated, "should compile templates with changed name");
 
+    var generated = grunt.file.read('tmp/filters_simple.js');
+    var expected = grunt.file.read('test/expected/filters_simple.js');
+    test.equal(expected, generated, "should compile template with filter");
+
     test.done()
   }
 };

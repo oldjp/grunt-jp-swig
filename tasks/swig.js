@@ -19,10 +19,15 @@ module.exports = function(grunt) {
             prettify: false,
             processor: false, 
             processContent: function(src) { return src; },
-            processName: function(name) { return name; }
+            processName: function(name) { return name; },
+            filters: []
         });
         
         var nsInfo = helpers.getNamespaceDeclaration(options.namespace);
+
+        for(var i = 0; i < options.filters.length; i++){
+            swig.setFilter(options.filters[i], function(){});
+        }
 
         this.files.forEach(function(f) {
             
@@ -71,7 +76,6 @@ module.exports = function(grunt) {
                 }
 
                 var template = output.join(grunt.util.normalizelf(options.separator));
-
                 if(options.prettify) {
                     template = beautify(template, {indent_size:4});
                 }

@@ -67,6 +67,12 @@ module.exports = function(grunt) {
           }
         },
         files:{ 'tmp/process_name.js': ['test/fixtures/*.swig'] }
+      },
+      opts_filters: {
+        options:{
+          filters: ['simple']
+        },
+        files:{ 'tmp/filters_simple.js': ['test/fixtures/filters/simple.swig'] }
       }
     },
 

@@ -31,13 +31,18 @@ Sample configuration:
       processContent: function(src) { return src; },
 
       // modify template name
-      processName: function(name) { return name; }
-    }
+      processName: function(name) { return name; },
+
+      // additional filter list 
+      filters:[]
+    },
+
+    files:{ 'dest.js': ['templates/**/*.swig'] }
   }	
 }
 ```
 
-On browser site:
+In browser:
 ----------------
 
 ```JavaScript
