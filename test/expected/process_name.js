@@ -3,7 +3,7 @@ this["SWIG"] = this["SWIG"] || {};
 this["SWIG"]["loops"] = function(data){ return window.swig.run(function (_swig,_ctx,_filters,_utils,_fn) {
   var _ext = _swig.extensions,
     _output = "";
-_output += "<ul>\n	";
+_output += "<ul>";
 (function () {
   var __l = ((typeof array !== "undefined") ? ((typeof array !== "undefined") ? array : "") : ((typeof _ctx.array !== "undefined") ? _ctx.array : ""));
   if (!__l) { return; }
@@ -12,15 +12,15 @@ _output += "<ul>\n	";
     loop.key = key;
     loop.first = (loop.index0 === 0);
     loop.last = (loop.revindex0 === 0);
-    _output += "\n		<li>";
+    _output += "<li>";
 _output += _filters["e"](((typeof key !== "undefined") ? ((typeof key !== "undefined") ? key : "") : ((typeof _ctx.key !== "undefined") ? _ctx.key : "")));
 _output += ": ";
 _output += _filters["e"](((typeof val !== "undefined") ? ((typeof val !== "undefined") ? val : "") : ((typeof _ctx.val !== "undefined") ? _ctx.val : "")));
-_output += "</li>\n	";
+_output += "</li>";
     loop.index += 1; loop.index0 += 1; loop.revindex -= 1; loop.revindex0 -= 1;
   });
 })();
-_output += "\n</ul>";
+_output += "</ul>";
 
   return _output;
 

@@ -48,7 +48,7 @@ module.exports = function(grunt) {
             
             }).map(function(filepath) {
             
-                var src = htmlMinify(grunt.file.read(filepath), options.htmlMinify);
+                var src = htmlMinify(grunt.file.read(filepath), options.htmlMinifySettings);
                 var compiled, filename, run;
 
                 filename = options.processName(filepath);
