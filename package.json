@@ -1,7 +1,7 @@
 {
   "name": "grunt-jp-swig",
   "description": "Compiles swig templates",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://github.com/johnpitcher/grunt-jp-swig",
   "author": {
     "name": "John Pitcher",
