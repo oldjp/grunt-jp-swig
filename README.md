@@ -14,8 +14,11 @@ Sample configuration:
       // window.<namespace>
       namespace: 'SWIG',
 
-      // @todo
+      // see: http://paularmstrong.github.io/swig/docs/api/#SwigOpts
       templateSettings: {},
+
+      // see: http://perfectionkills.com/experimenting-with-html-minifier/#options
+      htmlMinifySettings: {},
 
       amd: false,
       
@@ -48,3 +51,4 @@ In browser:
 ```JavaScript
   var html = window.SWIG[<template name>]({});
 ```
+

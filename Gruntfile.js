@@ -4,14 +4,32 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     jshint: {
-      all: [
+      all: {
+        options:{
+          jshintrc: '.jshintrc'
+        },
+        src:[
         'Gruntfile.js',
         'tasks/*.js',
         '<%= nodeunit.tests %>',
-      ],
-      options: {
-        jshintrc: '.jshintrc',
+        ],
       },
+      tmp: {
+        options:{
+          browser: true,
+          curly: true,
+          eqeqeq: true,
+          immed: true,
+          latedef: true,
+          newcap: true,
+          noarg: true,
+          sub: true,
+          undef: false,
+          boss: true,
+          eqnull: true
+        },
+        src: ['tmp/*.js'],
+      }
     },
 
     clean: {
@@ -42,12 +60,14 @@ module.exports = function(grunt) {
         files:{ 'tmp/amd_processor_prettify.js': ['test/fixtures/*.swig'] }
       },
       opts_layout_incorrect: {
-        options:{ layout: true },
+        options:{ 
+          layout: true, 
+          processor: false 
+        },
         files:{ 'tmp/layout_incorrect.js': ['test/fixtures/*.swig'] }
       },
       opts_layout_correct: {
         options:{
-          processor: 'window.swig',
           layout: true
         },
         files:{ 'tmp/layout_correct.js': ['test/fixtures/*.swig'] }
@@ -88,7 +108,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  grunt.registerTask('test', ['clean', 'swig-browser', 'nodeunit']);
-  grunt.registerTask('default', ['jshint', 'test']);
-
+  grunt.registerTask('test', ['clean', 'jshint:all' , 'swig-browser', 'jshint:tmp' , 'nodeunit']);
+  grunt.registerTask('default', ['clean', 'swig-browser']);
 };

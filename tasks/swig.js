@@ -3,30 +3,36 @@
 
 var swig = require('swig');
 var beautify = require('js-beautify').js_beautify;
+var htmlMinify = require('html-minifier').minify;
 
 module.exports = function(grunt) {
 
     grunt.registerMultiTask('swig-browser', 'Compiles swig templates', function() {
         var lf = grunt.util.linefeed;
         var helpers = require('grunt-lib-contrib').init(grunt);
+        var filter = function(){};
 
         var options = this.options({
-            namespace: 'SWIG',
+            namespace: 'SWIG',            
             templateSettings: {},
+            htmlMinifySettings: {
+                collapseWhitespace: true
+            },
             separator: lf + lf,
             amd: false,
             layout: false,
             prettify: false,
-            processor: false, 
+            processor: 'window.swig',
             processContent: function(src) { return src; },
             processName: function(name) { return name; },
             filters: []
         });
         
+        var parser = new swig.Swig(options.templateSettings);
         var nsInfo = helpers.getNamespaceDeclaration(options.namespace);
 
         for(var i = 0; i < options.filters.length; i++){
-            swig.setFilter(options.filters[i], function(){});
+            swig.setFilter(options.filters[i], filter);
         }
 
         this.files.forEach(function(f) {
@@ -42,11 +48,11 @@ module.exports = function(grunt) {
             
             }).map(function(filepath) {
             
-                var src = grunt.file.read(filepath);
+                var src = htmlMinify(grunt.file.read(filepath), options.htmlMinify);
                 var compiled, filename, run;
 
                 filename = options.processName(filepath);
-                compiled = swig.precompile(src).tpl.toString().replace('anonymous', '');
+                compiled = parser.precompile(src).tpl.toString().replace('anonymous', '');
                 compiled = options.processContent(compiled);
                 
                 if(options.layout && options.processor){
@@ -66,11 +72,6 @@ module.exports = function(grunt) {
             } else {
                 output.unshift(nsInfo.declaration);
                 if (options.amd) {
-                    if (options.prettify) {
-                        output.forEach(function(line, index) {
-                            output[index] = "  " + line;
-                        });
-                    }
                     output.unshift("define(function(){");
                     output.push("  return " + nsInfo.namespace + ";" + lf + "});");
                 }

@@ -1,6 +1,6 @@
 this["SWIG"] = this["SWIG"] || {};
 
-this["SWIG"]["loops"] = function (_swig,_ctx,_filters,_utils,_fn) {
+this["SWIG"]["loops"] = function(data){ return window.swig.run(function (_swig,_ctx,_filters,_utils,_fn) {
   var _ext = _swig.extensions,
     _output = "";
 _output += "<ul>\n	";
@@ -24,9 +24,9 @@ _output += "\n</ul>";
 
   return _output;
 
-};
+}, data); };
 
-this["SWIG"]["simple"] = function (_swig,_ctx,_filters,_utils,_fn) {
+this["SWIG"]["simple"] = function(data){ return window.swig.run(function (_swig,_ctx,_filters,_utils,_fn) {
   var _ext = _swig.extensions,
     _output = "";
 _output += "<div>";
@@ -35,4 +35,4 @@ _output += "</div>";
 
   return _output;
 
-};
+}, data); };
