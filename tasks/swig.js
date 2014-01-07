@@ -52,7 +52,7 @@ module.exports = function(grunt) {
                 var compiled, filename, run;
 
                 filename = options.processName(filepath);
-                compiled = parser.precompile(src).tpl.toString().replace('anonymous', '');
+                compiled = parser.precompile(src, {filename: filepath}).tpl.toString().replace('anonymous', '');
                 compiled = options.processContent(compiled);
                 
                 if(options.layout && options.processor){

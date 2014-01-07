@@ -51,6 +51,10 @@ exports.swig = {
     expected = grunt.file.read('test/expected/filters_simple.js');
     test.equal(expected, generated, "should compile template with filter");
 
+    generated = grunt.file.read('tmp/inheritance.js');
+    expected = grunt.file.read('test/expected/inheritance.js');
+    test.equal(expected, generated, "should compile templates with parent template");
+
     test.done();
   }
 };

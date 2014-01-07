@@ -93,6 +93,12 @@ module.exports = function(grunt) {
           filters: ['simple']
         },
         files:{ 'tmp/filters_simple.js': ['test/fixtures/filters/simple.swig'] }
+      },
+      opts_inheritance: {
+        options:{
+
+        },
+        files:{ 'tmp/inheritance.js': ['test/fixtures/inheritance/*.swig', '!test/fixtures/inheritance/base.swig'] }
       }
     },
 
