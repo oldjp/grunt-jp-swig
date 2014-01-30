@@ -1,4 +1,4 @@
-grunt-jp-swig [![Build Status](https://travis-ci.org/johnpitcher/grunt-jp-swig.png?branch=master)](https://travis-ci.org/johnpitcher/grunt-jp-swig)
+grunt-jp-swig [![Build Status](https://travis-ci.org/johnpitcher/grunt-jp-swig.png?branch=htmlclean)](https://travis-ci.org/johnpitcher/grunt-jp-swig)
 =============
 
 Swig templates compilation
