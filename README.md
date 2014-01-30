@@ -17,8 +17,8 @@ Sample configuration:
       // see: http://paularmstrong.github.io/swig/docs/api/#SwigOpts
       templateSettings: {},
 
-      // see: http://perfectionkills.com/experimenting-with-html-minifier/#options
-      htmlMinifySettings: {},
+      // Clean html source
+      htmlclean: true,
 
       amd: false,
       

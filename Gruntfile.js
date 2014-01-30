@@ -99,6 +99,12 @@ module.exports = function(grunt) {
 
         },
         files:{ 'tmp/inheritance.js': ['test/fixtures/inheritance/*.swig', '!test/fixtures/inheritance/base.swig'] }
+      },
+      opts_minify: {
+        options:{
+          htmlclean:true
+        },
+        files:{ 'tmp/minify.js': ['test/fixtures/minify/*.swig']}
       }
     },
 

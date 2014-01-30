@@ -3,7 +3,7 @@
 
 var swig = require('swig');
 var beautify = require('js-beautify').js_beautify;
-var htmlMinify = require('html-minifier').minify;
+var htmlclean = require('htmlclean');
 
 module.exports = function(grunt) {
 
@@ -15,9 +15,7 @@ module.exports = function(grunt) {
         var options = this.options({
             namespace: 'SWIG',            
             templateSettings: {},
-            htmlMinifySettings: {
-                collapseWhitespace: true
-            },
+            htmlclean: false,
             separator: lf + lf,
             amd: false,
             layout: false,
@@ -48,7 +46,10 @@ module.exports = function(grunt) {
             
             }).map(function(filepath) {
             
-                var src = htmlMinify(grunt.file.read(filepath), options.htmlMinifySettings);
+                var src = grunt.file.read(filepath);
+                if(options.htmlclean){
+                    src = htmlclean(src);
+                }
                 var compiled, filename, run;
 
                 filename = options.processName(filepath);

@@ -23,7 +23,7 @@ _output += "Test";
 
 _output += " :: Page";
 _output += "</title>\n	</head>\n	<body>\n		";
-_output += "<div>Some HTML...</div>";
+_output += "\n	<div>Some HTML...</div>\n";
 _output += "\n	</body>\n</html>";
 
   return _output;

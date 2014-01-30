@@ -55,6 +55,10 @@ exports.swig = {
     expected = grunt.file.read('test/expected/inheritance.js');
     test.equal(expected, generated, "should compile templates with parent template");
 
+    generated = grunt.file.read('tmp/minify.js');
+    expected = grunt.file.read('test/expected/minify.js');
+    test.equal(expected, generated, "should minify and compile template with swig directives inside the tags");
+
     test.done();
   }
 };
