@@ -16,7 +16,9 @@ module.exports = function(grunt) {
             namespace: 'SWIG',            
             templateSettings: {},
             htmlMinifySettings: {
-                collapseWhitespace: true
+                collapseWhitespace: true,
+                customAttrOpen:  /\{\%[^\}]+\%\}/,
+                customAttrClose: /\{\%[^\}]+\%\}/
             },
             separator: lf + lf,
             amd: false,
