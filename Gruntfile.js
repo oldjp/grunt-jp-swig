@@ -99,6 +99,17 @@ module.exports = function(grunt) {
 
         },
         files:{ 'tmp/inheritance.js': ['test/fixtures/inheritance/*.swig', '!test/fixtures/inheritance/base.swig'] }
+      },
+      opts_wrap_attributes: { 
+        options:{
+          htmlMinifySettings:{
+            customAttrOpen:  /\{\%[^\}]+\%\}/,
+            customAttrClose: /\{\%[^\}]+\%\}/
+          }
+        },
+        files:{ 
+          'tmp/wrap_attributes.js': ['test/fixtures/wrap_attributes.html'] 
+        } 
       }
     },
 

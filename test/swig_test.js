@@ -7,6 +7,10 @@ exports.swig = {
 
     var generated, expected;
 
+    test.doesNotThrow(function() {
+        grunt.file.read('tmp/wrap_attributes.js');
+    }, Error, "Should compile template with customAttrOpen & customAttrClose options.");
+
     generated = grunt.file.read('tmp/default_options_one.js');
     expected = grunt.file.read('test/expected/default_options_one.js');
     test.equal(expected, generated, "should compile one template with default options"); 
